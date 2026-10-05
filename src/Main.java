@@ -1,56 +1,87 @@
-/**
- * Entry point for the Expense Tracker application.
- *
- * Demonstrates creating expenses, storing them,
- * displaying them, calculating a total, and
- * finding the largest expense.
- */
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        // Create the ExpenseTracker.
+        Scanner scnr = new Scanner(System.in);
         ExpenseTracker tracker = new ExpenseTracker();
 
-        // Create several Expense objects.
-        Expense food = new Expense(
-                12.50,
-                "Food",
-                "Lunch"
-        );
+        boolean running = true;
 
-        Expense transportation = new Expense(
-                25.00,
-                "Transportation",
-                "Bus"
-        );
+        while (running) {
 
-        Expense entertainment = new Expense(
-                40.00,
-                "Entertainment",
-                "Movie"
-        );
+            System.out.println();
+            System.out.println("=== Expense Tracker ===");
+            System.out.println("1. Add Expense");
+            System.out.println("2. View Expenses");
+            System.out.println("3. View Total");
+            System.out.println("4. Find Largest Expense");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
 
-        // Add the expenses to the ArrayList.
-        tracker.addExpense(food);
-        tracker.addExpense(transportation);
-        tracker.addExpense(entertainment);
+            int choice = scnr.nextInt();
+            scnr.nextLine();
 
-        System.out.println("My Expenses");
-        System.out.println("----------------");
+            switch (choice) {
 
-        // Display all expenses.
-        tracker.viewExpenses();
+                case 1:
+                    System.out.print("Enter expense amount: ");
+                    double amount = scnr.nextDouble();
+                    scnr.nextLine();
 
-        // Calculate and display total spending.
-        System.out.println();
-        System.out.println("Total: $" + tracker.calculateTotal());
+                    System.out.print("Enter category: ");
+                    String category = scnr.nextLine();
 
-        // Find and display the largest expense.
-        Expense largest = tracker.findLargestExpense();
+                    System.out.print("Enter description: ");
+                    String description = scnr.nextLine();
 
-        if (largest != null) {
-            System.out.println("Largest Expense: " + largest);
+                    Expense expense = new Expense(
+                            amount,
+                            category,
+                            description
+                    );
+
+                    tracker.addExpense(expense);
+
+                    System.out.println("Expense added!");
+                    break;
+
+                case 2:
+                    System.out.println();
+                    System.out.println("Your Expenses:");
+                    tracker.viewExpenses();
+                    break;
+
+                case 3:
+                    double total = tracker.calculateTotal();
+
+                    System.out.println();
+                    System.out.println("Total Spending: $" + total);
+                    break;
+
+                case 4:
+                    Expense largest = tracker.findLargestExpense();
+
+                    if (largest == null) {
+                        System.out.println("No expenses have been added yet.");
+                    } else {
+                        System.out.println();
+                        System.out.println("Largest Expense:");
+                        System.out.println(largest);
+                    }
+                    break;
+
+                case 5:
+                    running = false;
+                    System.out.println("Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
         }
+
+        scnr.close();
     }
 }

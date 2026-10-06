@@ -9,16 +9,12 @@ public class Expense {
     private String category;
     private String description;
 
-    /**
-     * Creates a new Expense object.
-     */
     public Expense(double amount, String category, String description) {
         this.amount = amount;
         this.category = category;
         this.description = description;
     }
 
-    // Getter methods allow other classes to access the private fields.
     public double getAmount() {
         return amount;
     }
@@ -31,11 +27,13 @@ public class Expense {
         return description;
     }
 
-    /**
-     * Provides a readable representation of an expense.
-     */
     @Override
     public String toString() {
-        return "$" + amount + " | " + category + " | " + description;
+        return String.format(
+                "$%.2f | %s | %s",
+                amount,
+                category,
+                description
+        );
     }
 }

@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Entry point for the Expense Tracker application.
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -17,7 +20,8 @@ public class Main {
             System.out.println("2. View Expenses");
             System.out.println("3. View Total");
             System.out.println("4. Find Largest Expense");
-            System.out.println("5. Exit");
+            System.out.println("5. View Category Total");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scnr.nextInt();
@@ -57,7 +61,7 @@ public class Main {
                     double total = tracker.calculateTotal();
 
                     System.out.println();
-                    System.out.println("Total Spending: $" + total);
+                    System.out.printf("Total Spending: $%.2f%n", total);
                     break;
 
                 case 4:
@@ -73,6 +77,20 @@ public class Main {
                     break;
 
                 case 5:
+                    System.out.print("Enter category: ");
+                    String searchCategory = scnr.nextLine();
+
+                    double categoryTotal =
+                            tracker.calculateCategoryTotal(searchCategory);
+
+                    System.out.printf(
+                            "%s Total: $%.2f%n",
+                            searchCategory,
+                            categoryTotal
+                    );
+                    break;
+
+                case 6:
                     running = false;
                     System.out.println("Goodbye!");
                     break;

@@ -1,4 +1,15 @@
+# Java compiled files
 *.class
+
+# Maven
+api/target/
+
+# IDE files
 .idea/
 .vscode/
+
+# macOS
 .DS_Store
+
+# Local finance data
+finance-data.txt

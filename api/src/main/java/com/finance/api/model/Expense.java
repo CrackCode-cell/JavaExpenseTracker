@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 /**
  * Represents an expense stored in the database.
@@ -15,8 +17,13 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Positive(message = "Amount must be greater than zero")
     private double amount;
+
+    @NotBlank(message = "Category is required")
     private String category;
+
+    @NotBlank(message = "Description is required")
     private String description;
 
     public Expense() {
